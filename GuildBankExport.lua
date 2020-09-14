@@ -1,4 +1,4 @@
--- This file is loaded from "GuildBankExport.toc"
+-- This file is loaded from "Banking-Tools.toc"
 
 --Send message to chatlog when Guild Bank is opened
 local frame = CreateFrame("Frame")

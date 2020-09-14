@@ -1,4 +1,4 @@
--- This file is loaded from "mailexport.toc"
+-- This file is loaded from "Banking-Tools.toc"
 
 --SLASH_MAILEXPORT1, SLASH_MAILEXPORT2 = '/mex', '/mailexport';
 --function SlashCmdList.MAILEXPORT(msg, editBox)
