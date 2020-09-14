@@ -6,7 +6,7 @@ frame:RegisterEvent("GUILDBANKFRAME_OPENED")
 frame:SetScript(
    "OnEvent",
    function(self, event, ...)
-      print("|cffff0000 GuildExport: |r Type |cffffff00 /guildbankexport |r to export your gbank into CSV format.")
+      print("|cffff0000 Banking-Tools: |r Type |cffffff00 /guildbankexport |r to export your gbank into CSV format.")
    end
 )
 
