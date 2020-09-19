@@ -1,0 +1,4 @@
+package-as: Banking-Tools
+
+ignore:
+  - README.md
