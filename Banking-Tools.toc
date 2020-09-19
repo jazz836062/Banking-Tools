@@ -1,7 +1,7 @@
 ## Interface: 80300
 ## Title: Banking-Tools
 ## Author: Jazzy
-## Version: 1.0
+## Version: 1.0-Release
 MailExport.lua
 GuildBankExport.lua
 AutoReply.lua
