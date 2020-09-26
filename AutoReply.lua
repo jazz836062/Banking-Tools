@@ -1,21 +1,5 @@
 -- This file is loaded from "Banking-Tools.toc"
 
---SLASH_MAILEXPORT1, SLASH_MAILEXPORT2 = '/mex', '/mailexport';
---function SlashCmdList.MAILEXPORT(msg, editBox)
---    for i = 1, GetInboxNumItems() do
---   -- An underscore is commonly used to name variables you aren't going to use in your code:
---   local _, _, sender, subject, money, _, daysLeft, hasItem, _, _, _, canReply = GetInboxHeaderInfo(i)
---      print(date("%a %b %d %H:%M:%S %Y"), canReply, subject, money,"from", sender, "has attachments:")
---      for j = 1, ATTACHMENTS_MAX_RECEIVE do
---         local name, itemID, texture, count, quality, canUse = GetInboxItem(i, j)
---         if name then
---            -- Construct an inline texture sequence:
---            print(name, "x", count)
---         end
---      end
---    end
---end
-
 local frame = CreateFrame("Frame")
 frame:RegisterEvent("MAIL_SHOW")
 frame:SetScript("OnEvent", function(self, event, ...)
