@@ -9,8 +9,10 @@ end)
 SLASH_AUTOREPLY1 = "/autoreply"
 SlashCmdList["AUTOREPLY"] = function(msg)
   local playerName = UnitName("player");
-  local list = {}
-  for i = 1, GetInboxNumItems() do
+  local inboxMails,_ = GetInboxNumItems();
+  local JazzySendMail = {};
+  for i = 1, inboxMails do
+
     -- An underscore is commonly used to name variables you aren't going to use in your code:
     local _, _, sender, subject, money, _, daysLeft, hasItem, _, _, _, canReply = GetInboxHeaderInfo(i)
     local message = "Thank you, "..sender..", for your donation of:\n\n"   ;
@@ -20,13 +22,15 @@ SlashCmdList["AUTOREPLY"] = function(msg)
       local copper = money-((gold*10000)+(silver*100))
       message = message..gold.."g"..silver.."s"..copper.."c\n";
     end
-    for j = 1, ATTACHMENTS_MAX_RECEIVE do
+    for j = 1, 12 do
       local name, itemID, texture, count, quality, canUse = GetInboxItem(i, j)
       if name then
         message = message..count.." - "..name.."\n";
       end
     end
-  message = message.."\nThe banking team appreciates your support.\n\nSincerely,\n"..playerName;
-  SendMail(sender,"Thank you for your donation",message)
+    message = message.."\nThe banking team appreciates your support.\n\nSincerely,\n"..playerName;
+    local ticker = C_Timer.NewTicker(1,function()
+      SendMail(sender,"Thank you for your donation",message)
+    end,inboxMails)
   end
 end
