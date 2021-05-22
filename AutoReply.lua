@@ -30,7 +30,9 @@ SlashCmdList["AUTOREPLY"] = function(msg)
     end
     message = message.."\nThe banking team appreciates your support.\n\nSincerely,\n"..playerName;
     local ticker = C_Timer.NewTicker(1,function()
+      if (sender ~= "Auction House") then
       SendMail(sender,"Thank you for your donation",message)
+      end
     end,inboxMails)
   end
 end
