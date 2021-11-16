@@ -33,6 +33,6 @@ SlashCmdList["AUTOREPLY"] = function(msg)
       if (sender ~= "Auction House") then
       SendMail(sender,"Thank you for your donation",message)
       end
-    end,inboxMails)
+    end,1)
   end
 end
