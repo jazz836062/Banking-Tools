@@ -38,66 +38,66 @@ SLASH_GUILDEXPORT1 = "/guildbankexport"
 function SlashCmdList.GUILDEXPORT(msg)
 
    --Tab Check/hide
-TabConfig.tab1CheckBox:Hide()
-TabConfig.tab2CheckBox:Hide()
-TabConfig.tab3CheckBox:Hide()
-TabConfig.tab4CheckBox:Hide()
-TabConfig.tab5CheckBox:Hide()
-TabConfig.tab6CheckBox:Hide()
-TabConfig.tab7CheckBox:Hide()
-TabConfig.tab8CheckBox:Hide()
+   TabConfig.tab1CheckBox:Hide()
+   TabConfig.tab2CheckBox:Hide()
+   TabConfig.tab3CheckBox:Hide()
+   TabConfig.tab4CheckBox:Hide()
+   TabConfig.tab5CheckBox:Hide()
+   TabConfig.tab6CheckBox:Hide()
+   TabConfig.tab7CheckBox:Hide()
+   TabConfig.tab8CheckBox:Hide()
 
-local numTabs = GetNumGuildBankTabs()
+   local numTabs = GetNumGuildBankTabs()
 
-if numTabs >= 1 then
-   TabConfig.tab1CheckBox.text:SetText(select(1,GetGuildBankTabInfo(1)))
-   TabConfig.tab1CheckBox:Show()
-   TabConfig.tab1CheckBox:SetChecked(true)
-end
+   if numTabs >= 1 then
+      TabConfig.tab1CheckBox.text:SetText(select(1,GetGuildBankTabInfo(1)))
+      TabConfig.tab1CheckBox:Show()
+      TabConfig.tab1CheckBox:SetChecked(true)
+   end
 
-if numTabs >= 2 then
-   TabConfig.tab2CheckBox.text:SetText(select(1,GetGuildBankTabInfo(2)))
-   TabConfig.tab2CheckBox:Show()
-   TabConfig.tab2CheckBox:SetChecked(true)
-end
+   if numTabs >= 2 then
+      TabConfig.tab2CheckBox.text:SetText(select(1,GetGuildBankTabInfo(2)))
+      TabConfig.tab2CheckBox:Show()
+      TabConfig.tab2CheckBox:SetChecked(true)
+   end
 
-if numTabs >= 3 then
-   TabConfig.tab3CheckBox.text:SetText(select(1,GetGuildBankTabInfo(3)))
-   TabConfig.tab3CheckBox:Show()
-   TabConfig.tab3CheckBox:SetChecked(true)
-end
+   if numTabs >= 3 then
+      TabConfig.tab3CheckBox.text:SetText(select(1,GetGuildBankTabInfo(3)))
+      TabConfig.tab3CheckBox:Show()
+      TabConfig.tab3CheckBox:SetChecked(true)
+   end
 
-if numTabs >= 4 then
-   TabConfig.tab4CheckBox.text:SetText(select(1,GetGuildBankTabInfo(4)))
-   TabConfig.tab4CheckBox:Show()
-   TabConfig.tab4CheckBox:SetChecked(true)
-end
+   if numTabs >= 4 then
+      TabConfig.tab4CheckBox.text:SetText(select(1,GetGuildBankTabInfo(4)))
+      TabConfig.tab4CheckBox:Show()
+      TabConfig.tab4CheckBox:SetChecked(true)
+   end
 
-if numTabs >= 5 then
-   TabConfig.tab5CheckBox.text:SetText(select(1,GetGuildBankTabInfo(5)))
-   TabConfig.tab5CheckBox:Show()
-   TabConfig.tab5CheckBox:SetChecked(true)
-end
+   if numTabs >= 5 then
+      TabConfig.tab5CheckBox.text:SetText(select(1,GetGuildBankTabInfo(5)))
+      TabConfig.tab5CheckBox:Show()
+      TabConfig.tab5CheckBox:SetChecked(true)
+   end
 
-if numTabs >= 6 then
-   TabConfig.tab6CheckBox.text:SetText(select(1,GetGuildBankTabInfo(6)))
-   TabConfig.tab6CheckBox:Show()
-   TabConfig.tab6CheckBox:SetChecked(true)
-end
+   if numTabs >= 6 then
+      TabConfig.tab6CheckBox.text:SetText(select(1,GetGuildBankTabInfo(6)))
+      TabConfig.tab6CheckBox:Show()
+      TabConfig.tab6CheckBox:SetChecked(true)
+   end
 
-if numTabs >= 7 then
-   TabConfig.tab7CheckBox.text:SetText(select(1,GetGuildBankTabInfo(7)))
-   TabConfig.tab7CheckBox:Show()
-   TabConfig.tab7CheckBox:SetChecked(true)
-end
+   if numTabs >= 7 then
+      TabConfig.tab7CheckBox.text:SetText(select(1,GetGuildBankTabInfo(7)))
+      TabConfig.tab7CheckBox:Show()
+      TabConfig.tab7CheckBox:SetChecked(true)
+   end
 
-if numTabs >= 8 then
-   TabConfig.tab8CheckBox.text:SetText(select(1,GetGuildBankTabInfo(8)))
-   TabConfig.tab8CheckBox:Show()
-   TabConfig.tab8CheckBox:SetChecked(true)
-end
+   if numTabs >= 8 then
+      TabConfig.tab8CheckBox.text:SetText(select(1,GetGuildBankTabInfo(8)))
+      TabConfig.tab8CheckBox:Show()
+      TabConfig.tab8CheckBox:SetChecked(true)
+   end
 
-   TabConfig:Show()
+      TabConfig:Show()
 end
 
 local function runExport()
