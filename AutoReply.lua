@@ -29,10 +29,17 @@ SlashCmdList["AUTOREPLY"] = function(msg)
       end
     end
     message = message.."\nThe banking team appreciates your support.\n\nSincerely,\n"..playerName;
-    local ticker = C_Timer.NewTicker(1,function()
-      if (sender ~= "Auction House") then
-      SendMail(sender,"Thank you for your donation",message)
-      end
-    end,1)
+    if (sender ~= "Auction House") then
+      table.insert(JazzySendMail, {sender,message})
+    end
   end
+
+  print(#JazzySendMail.." replies to send out")
+
+  local counter = 1;
+  local ticker = C_Timer.NewTicker(3,function()
+      SendMail(JazzySendMail[counter][1],"Thank you for your donation",JazzySendMail[counter][2])
+      print("Main #"..counter.." Sent to "..JazzySendMail[counter][1])
+      counter=counter+1
+  end,#JazzySendMail)
 end
