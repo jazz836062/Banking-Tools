@@ -1,7 +1,7 @@
 ## Interface: 90105
 ## Title: Banking-Tools
 ## Author: Jazzy
-## Version: 1.12
+## Version: 1.13
 MailExport.lua
 GuildBankExport.lua
 AutoReply.lua
