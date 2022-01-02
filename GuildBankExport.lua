@@ -38,6 +38,8 @@ SLASH_GUILDEXPORT1 = "/guildbankexport"
 function SlashCmdList.GUILDEXPORT(msg)
 
    --Tab Check/hide
+   TabConfig.goldCheckBox:Show()
+   TabConfig.goldCheckBox:SetChecked(true)
    TabConfig.tab1CheckBox:Hide()
    TabConfig.tab2CheckBox:Hide()
    TabConfig.tab3CheckBox:Hide()
@@ -114,9 +116,11 @@ local function runExport()
       TabConfig.tab8CheckBox:GetChecked()
    }
    local list = {}
-   tinsert(list, "Gold;")
-   tinsert(list, GetGuildBankMoney())
-   tinsert(list, "\n")
+   if TabConfig.goldCheckBox:GetChecked() then
+      tinsert(list, "Gold;")
+      tinsert(list, GetGuildBankMoney())
+      tinsert(list, "\n")
+   end
    for i = 1, 8 do
       if tabs[i] then
          for j = 1, (7 * 14) do
@@ -145,7 +149,7 @@ end
 ---------------Create Tab Config Frame-------------------------
 --Tab Selection Frame
 TabConfig = CreateFrame("Frame", "Tab Selection", UIParent, "BasicFrameTemplateWithInset")
-TabConfig:SetSize(200, 350)
+TabConfig:SetSize(200, 370)
 TabConfig:SetPoint("Center", UIParent, "Center")
 
 --Title
@@ -155,8 +159,15 @@ TabConfig.title:SetPoint("Left", TabConfig.TitleBg, "Left", 5, 0)
 TabConfig.title:SetText("Tab Selection")
 
 --Checkboxes
+TabConfig.goldCheckBox = CreateFrame("CheckButton", nil, TabConfig, "UICheckButtonTemplate")
+TabConfig.goldCheckBox:SetPoint("TOPLEFT", TabConfig, "TOPLEFT", 10, -30)
+TabConfig.goldCheckBox.text:SetText("Gold")
+TabConfig.goldCheckBox.text:SetFontObject("GameFontNormalLarge")
+TabConfig.goldCheckBox:SetSize(40, 40)
+TabConfig.goldCheckBox:SetChecked(false)
+
 TabConfig.tab1CheckBox = CreateFrame("CheckButton", nil, TabConfig, "UICheckButtonTemplate")
-TabConfig.tab1CheckBox:SetPoint("TOPLEFT", TabConfig, "TOPLEFT", 10, -30)
+TabConfig.tab1CheckBox:SetPoint("TOPLEFT", TabConfig.goldCheckBox, "TOPLEFT", 0, -30)
 TabConfig.tab1CheckBox.text:SetText("Tab 1")
 TabConfig.tab1CheckBox.text:SetFontObject("GameFontNormalLarge")
 TabConfig.tab1CheckBox:SetSize(40, 40)
