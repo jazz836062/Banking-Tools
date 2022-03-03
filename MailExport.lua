@@ -16,10 +16,14 @@
 --    end
 --end
 
+local mailexportmessage = true;
 local frame = CreateFrame("Frame")
 frame:RegisterEvent("MAIL_SHOW")
 frame:SetScript("OnEvent", function(self, event, ...)
- print("|cffff0000 Banking-Tools: |r Type |cffffff00 /mailexport |r to export your mail into CSV format.")
+  if mailexportmessage then
+    print("|cffff0000 Banking-Tools: |r Type |cffffff00 /mailexport |r to export your mail into CSV format.")
+    mailexportmessage = false;
+  end
 end)
 
 -- create parent frame with default "BasicFrameTemplate" template

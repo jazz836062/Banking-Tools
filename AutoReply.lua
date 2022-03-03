@@ -1,9 +1,13 @@
 -- This file is loaded from "Banking-Tools.toc"
 
+local autoreplymessage = true;
 local frame = CreateFrame("Frame")
 frame:RegisterEvent("MAIL_SHOW")
 frame:SetScript("OnEvent", function(self, event, ...)
- print("|cffff0000 Banking-Tools: |r Type |cffffff00 /autoreply |r to reply to all your mail with a thank you.")
+  if autoreplymessage then
+    print("|cffff0000 Banking-Tools: |r Type |cffffff00 /autoreply |r to reply to all your mail with a thank you.");
+    autoreplymessage = false;
+  end
 end)
 
 SLASH_AUTOREPLY1 = "/autoreply"

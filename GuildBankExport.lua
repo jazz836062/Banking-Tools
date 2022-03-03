@@ -1,12 +1,16 @@
 -- This file is loaded from "Banking-Tools.toc"
 
 --Send message to chatlog when Guild Bank is opened
+local guildbankexportmessage = true;
 local frame = CreateFrame("Frame")
 frame:RegisterEvent("GUILDBANKFRAME_OPENED")
 frame:SetScript(
    "OnEvent",
    function(self, event, ...)
-      print("|cffff0000 Banking-Tools: |r Type |cffffff00 /guildbankexport |r to export your gbank into CSV format.")
+      if guildbankexportmessage then
+         print("|cffff0000 Banking-Tools: |r Type |cffffff00 /guildbankexport |r to export your gbank into CSV format.")
+         guildbankexportmessage = false;
+      end
    end
 )
 
