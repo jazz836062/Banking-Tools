@@ -1,7 +1,7 @@
-## Interface: 90200
+## Interface: 90207
 ## Title: Banking-Tools
 ## Author: Jazzy
-## Version: 1.17
+## Version: 1.18
 ## X-Wago-ID: vEGPQkN1
 MailExport.lua
 GuildBankExport.lua
