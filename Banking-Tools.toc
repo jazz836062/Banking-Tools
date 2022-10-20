@@ -1,4 +1,4 @@
-## Interface: 100000
+## Interface: 90207
 ## Title: Banking-Tools
 ## Author: Jazzy
 ## Version: 1.19
