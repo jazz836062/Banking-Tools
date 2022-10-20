@@ -14,7 +14,7 @@ frame:SetScript(
    end
 )
 
---Create parent frame with default "BasicFrameTemplate" template
+--[[Create parent frame with default "BasicFrameTemplate" template
 local frame = CreateFrame("Frame", "GuildExportFrame", UIParent, "BasicFrameTemplate")
 frame:SetSize(600, 600)
 frame:SetPoint("CENTER")
@@ -33,7 +33,68 @@ editBox:SetFontObject("ChatFontNormal")
 editBox:SetAllPoints(true)
 editBox:SetWidth(frame.scrollFrame:GetWidth()) --Multiline editboxes need a width declared!!
 --When ESC is hit while editbox has focus, clear focus (a second ESC closes window)
-editBox:SetScript("OnEscapePressed", editBox.ClearFocus)
+editBox:SetScript("OnEscapePressed", editBox.ClearFocus)--]]
+
+-- Frame code largely adapted from https://www.wowinterface.com/forums/showpost.php?p=323901&postcount=2
+    -- Main Frame
+    local f = CreateFrame("Frame", "GuildBankExportFrame", UIParent, "DialogBoxFrame")
+    f:ClearAllPoints()
+    -- load position from local DB
+    f:SetPoint("CENTER")
+    f:SetSize(600,600)
+    f:SetBackdrop({
+      bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background",
+      edgeFile = "Interface\\PVPFrame\\UI-Character-PVP-Highlight",
+      edgeSize = 16,
+      insets = { left = 8, right = 8, top = 8, bottom = 8 },
+    })
+    f:SetMovable(true)
+    f:SetClampedToScreen(true)
+    f:SetScript("OnMouseDown", function(self, button)
+      if button == "LeftButton" then
+        self:StartMoving()
+      end
+    end)
+
+    -- scroll frame
+    local sf = CreateFrame("ScrollFrame", "GuildBankExportScrollFrame", f, "UIPanelScrollFrameTemplate")
+    sf:SetPoint("LEFT", 16, 0)
+    sf:SetPoint("RIGHT", -32, 0)
+    sf:SetPoint("TOP", 0, -32)
+    sf:SetPoint("BOTTOM", GuildBankExportFrameButton, "TOP", 0, 0)
+
+    -- edit box
+    local eb = CreateFrame("EditBox", "GuildBankExportEditBox", GuildBankExportScrollFrame)
+    eb:SetSize(sf:GetSize())
+    eb:SetMultiLine(true)
+    eb:SetAutoFocus(true)
+    eb:SetFontObject("ChatFontNormal")
+    eb:SetScript("OnEscapePressed", function() f:Hide() end)
+    sf:SetScrollChild(eb)
+
+    -- resizing
+    f:SetResizable(false)
+    local rb = CreateFrame("Button", "GuildBankExportResizeButton", f)
+    rb:SetPoint("BOTTOMRIGHT", -6, 7)
+    rb:SetSize(16, 16)
+
+    rb:SetNormalTexture("Interface\\ChatFrame\\UI-ChatIM-SizeGrabber-Up")
+    rb:SetHighlightTexture("Interface\\ChatFrame\\UI-ChatIM-SizeGrabber-Highlight")
+    rb:SetPushedTexture("Interface\\ChatFrame\\UI-ChatIM-SizeGrabber-Down")
+
+    rb:SetScript("OnMouseDown", function(self, button)
+        if button == "LeftButton" then
+            f:StartSizing("BOTTOMRIGHT")
+            self:GetHighlightTexture():Hide() -- more noticeable
+        end
+    end)
+    rb:SetScript("OnMouseUp", function(self, button)
+        f:StopMovingOrSizing()
+        self:GetHighlightTexture():Show()
+        eb:SetWidth(sf:GetWidth())
+    end)
+
+    GuildBankExportFrame = f
 
 -- set up /guildexport slash command to dump guildbank to editbox
 SLASH_GUILDEXPORT1 = "/guildbankexport"
@@ -143,11 +204,11 @@ local function runExport()
       end
    end
    --Send them to editbox
-   editBox:SetText(table.concat(list))
+   GuildBankExportEditBox:SetText(table.concat(list))
    --Show frame and highlight text just added for copy-pasting
-   frame:Show()
-   editBox:HighlightText()
-   editBox:SetFocus(true)
+   f:Show()
+   GuildBankExportEditBox:HighlightText()
+   GuildBankExportEditBox:SetFocus(true)
 end
 
 ---------------Create Tab Config Frame-------------------------

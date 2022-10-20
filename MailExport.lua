@@ -26,7 +26,7 @@ frame:SetScript("OnEvent", function(self, event, ...)
   end
 end)
 
--- create parent frame with default "BasicFrameTemplate" template
+--[[ create parent frame with default "BasicFrameTemplate" template
 local frame = CreateFrame("Frame","MailExportFrame",UIParent,"BasicFrameTemplate")
 frame:SetSize(600,600)
 frame:SetPoint("CENTER")
@@ -35,7 +35,7 @@ frame:Hide()
 tinsert(UISpecialFrames,"MailExportFrame")
 
 -- create scrollable editbox with default "InputScrollFrameTemplate" template
-frame.scrollFrame = CreateFrame("ScrollFrame","MailExportScrollFrame",frame,"InputScrollFrameTemplate")
+frame.scrollFrame = CreateFrame("ScrollFrame","MailExportScrollFrame",frame,"WowScrollBoxList")
 frame.scrollFrame:SetPoint("TOPLEFT",8,-30)
 frame.scrollFrame:SetPoint("BOTTOMRIGHT",-12,9)
 
@@ -45,9 +45,69 @@ editBox:SetFontObject("ChatFontNormal")
 editBox:SetAllPoints(true)
 editBox:SetWidth(frame.scrollFrame:GetWidth()) -- multiline editboxes need a width declared!!
 -- when ESC is hit while editbox has focus, clear focus (a second ESC closes window)
-editBox:SetScript("OnEscapePressed",editBox.ClearFocus)
+editBox:SetScript("OnEscapePressed",editBox.ClearFocus)--]]
 
--- set up /listraidroster slash command to dump raid roster to above editbox
+  -- Frame code largely adapted from https://www.wowinterface.com/forums/showpost.php?p=323901&postcount=2
+    -- Main Frame
+    local f = CreateFrame("Frame", "MailExportFrame", UIParent, "DialogBoxFrame")
+    f:ClearAllPoints()
+    -- load position from local DB
+    f:SetPoint("CENTER")
+    f:SetSize(600,600)
+    f:SetBackdrop({
+      bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background",
+      edgeFile = "Interface\\PVPFrame\\UI-Character-PVP-Highlight",
+      edgeSize = 16,
+      insets = { left = 8, right = 8, top = 8, bottom = 8 },
+    })
+    f:SetMovable(true)
+    f:SetClampedToScreen(true)
+    f:SetScript("OnMouseDown", function(self, button)
+      if button == "LeftButton" then
+        self:StartMoving()
+      end
+    end)
+
+    -- scroll frame
+    local sf = CreateFrame("ScrollFrame", "MailExportScrollFrame", f, "UIPanelScrollFrameTemplate")
+    sf:SetPoint("LEFT", 16, 0)
+    sf:SetPoint("RIGHT", -32, 0)
+    sf:SetPoint("TOP", 0, -32)
+    sf:SetPoint("BOTTOM", MailExportFrameButton, "TOP", 0, 0)
+
+    -- edit box
+    local eb = CreateFrame("EditBox", "MailExportEditBox", MailExportScrollFrame)
+    eb:SetSize(sf:GetSize())
+    eb:SetMultiLine(true)
+    eb:SetAutoFocus(true)
+    eb:SetFontObject("ChatFontNormal")
+    eb:SetScript("OnEscapePressed", function() f:Hide() end)
+    sf:SetScrollChild(eb)
+
+    -- resizing
+    f:SetResizable(false)
+    local rb = CreateFrame("Button", "MailExportResizeButton", f)
+    rb:SetPoint("BOTTOMRIGHT", -6, 7)
+    rb:SetSize(16, 16)
+
+    rb:SetNormalTexture("Interface\\ChatFrame\\UI-ChatIM-SizeGrabber-Up")
+    rb:SetHighlightTexture("Interface\\ChatFrame\\UI-ChatIM-SizeGrabber-Highlight")
+    rb:SetPushedTexture("Interface\\ChatFrame\\UI-ChatIM-SizeGrabber-Down")
+
+    rb:SetScript("OnMouseDown", function(self, button)
+        if button == "LeftButton" then
+            f:StartSizing("BOTTOMRIGHT")
+            self:GetHighlightTexture():Hide() -- more noticeable
+        end
+    end)
+    rb:SetScript("OnMouseUp", function(self, button)
+        f:StopMovingOrSizing()
+        self:GetHighlightTexture():Show()
+        eb:SetWidth(sf:GetWidth())
+    end)
+
+    MailExportFrame = f
+    
 SLASH_MAILEXPORT1 = "/mailexport"
 SlashCmdList["MAILEXPORT"] = function(msg)
   local playerName = UnitName("player");
@@ -79,9 +139,9 @@ end
 
 
   -- send them to editbox
-  editBox:SetText(table.concat(list))
+  MailExportEditBox:SetText(table.concat(list))
   -- show frame and highlight text just added for copy-pasting
-  frame:Show()
-  editBox:HighlightText()
-  editBox:SetFocus(true)
+  MailExportFrame:Show()
+  MailExportEditBox:HighlightText()
+  MailExportEditBox:SetFocus(true)
 end
