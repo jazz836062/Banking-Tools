@@ -192,9 +192,12 @@ local function runExport()
             local tab = i
             local slot = j
             if GetGuildBankItemLink(tab, slot) then
-               local itemName = select(1, GetItemInfo(GetGuildBankItemLink(tab, slot)))
+               local itemName = select(1, C_Item.GetItemInfo(GetGuildBankItemLink(tab, slot)))
                local quantity = select(2, GetGuildBankItemInfo(tab, slot))
+               local itemID = C_Item.GetItemIDForItemInfo(C_Item.GetItemInfo(GetGuildBankItemLink(tab, slot)))
 
+               tinsert(list,itemID)
+               tinsert(list,";")
                tinsert(list, itemName)
                tinsert(list, ";")
                tinsert(list, quantity)

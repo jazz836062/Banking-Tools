@@ -128,10 +128,12 @@ SlashCmdList["MAILEXPORT"] = function(msg)
       local name, itemID, texture, count, quality, canUse = GetInboxItem(i, j)
         if name then
           -- Construct an inline texture sequence:
-        tinsert(list,";")
-        tinsert(list,name)
-        tinsert(list,";")
-        tinsert(list,count)
+          tinsert(list,";")
+          tinsert(list,itemID)
+          tinsert(list,";")
+          tinsert(list,name)
+          tinsert(list,";")
+          tinsert(list,count)
         end
 end
 tinsert(list,"\n")
