@@ -1,4 +1,4 @@
-## Interface: 110000
+## Interface: 110002
 ## Title: Banking-Tools
 ## Author: Jazzy
 ## Version: 1.24

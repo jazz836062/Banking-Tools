@@ -3,7 +3,7 @@
 --Send message to chatlog when Guild Bank is opened
 local guildbankexportmessage = true;
 local frame = CreateFrame("Frame")
-frame:RegisterEvent("GUILDBANK_UPDATE_TABS")
+frame:RegisterEvent("GUILDBANK_UPDATE_TABS") --This isn't firing consistantly
 frame:SetScript(
    "OnEvent",
    function(self, event, ...)
