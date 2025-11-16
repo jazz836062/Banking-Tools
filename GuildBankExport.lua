@@ -3,7 +3,7 @@
 --Send message to chatlog when Guild Bank is opened
 local guildbankexportmessage = true;
 local frame = CreateFrame("Frame")
-frame:RegisterEvent("GUILDBANKFRAME_OPENED")
+frame:RegisterEvent("GUILDBANK_UPDATE_TABS") --This isn't firing consistantly
 frame:SetScript(
    "OnEvent",
    function(self, event, ...)
@@ -182,7 +182,7 @@ local function runExport()
    }
    local list = {}
    if TabConfig.goldCheckBox:GetChecked() then
-      tinsert(list, "Gold;")
+      tinsert(list, "Gold;Gold;")
       tinsert(list, GetGuildBankMoney())
       tinsert(list, "\n")
    end
@@ -192,9 +192,12 @@ local function runExport()
             local tab = i
             local slot = j
             if GetGuildBankItemLink(tab, slot) then
-               local itemName = select(1, GetItemInfo(GetGuildBankItemLink(tab, slot)))
+               local itemName = select(1, C_Item.GetItemInfo(GetGuildBankItemLink(tab, slot)))
                local quantity = select(2, GetGuildBankItemInfo(tab, slot))
+               local itemID = C_Item.GetItemIDForItemInfo(select(2,C_Item.GetItemInfo(GetGuildBankItemLink(tab, slot))))
 
+               tinsert(list,itemID)
+               tinsert(list,";")
                tinsert(list, itemName)
                tinsert(list, ";")
                tinsert(list, quantity)

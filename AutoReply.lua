@@ -43,7 +43,7 @@ SlashCmdList["AUTOREPLY"] = function(msg)
   local counter = 1;
   local ticker = C_Timer.NewTicker(3,function()
       SendMail(JazzySendMail[counter][1],"Thank you for your donation",JazzySendMail[counter][2])
-      print("Mail #"..counter.." Sent to "..JazzySendMail[counter][1])
+      print("Mail #"..counter.." out of "..#JazzySendMail.." Sent to "..JazzySendMail[counter][1])
       counter=counter+1
   end,#JazzySendMail)
 end

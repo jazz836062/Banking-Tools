@@ -1,7 +1,7 @@
 ## Interface: 120000
 ## Title: Banking-Tools
 ## Author: Jazzy
-## Version: 1.25-Beta
+## Version: 1.29-Beta
 ## X-Wago-ID: vEGPQkN1
 MailExport.lua
 GuildBankExport.lua
