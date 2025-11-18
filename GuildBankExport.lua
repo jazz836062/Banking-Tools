@@ -218,12 +218,12 @@ end
 --Tab Selection Frame
 TabConfig = CreateFrame("Frame", "Tab Selection", UIParent, "BasicFrameTemplateWithInset")
 TabConfig:SetSize(200, 370)
-TabConfig:SetPoint("Center", UIParent, "Center")
+TabConfig:SetPoint("CENTER", UIParent, "CENTER")
 
 --Title
 TabConfig.title = TabConfig:CreateFontString(nil, "OVERLAY")
 TabConfig.title:SetFontObject("GameFontHighlight")
-TabConfig.title:SetPoint("Left", TabConfig.TitleBg, "Left", 5, 0)
+TabConfig.title:SetPoint("LEFT", TabConfig.TitleBg, "LEFT", 5, 0)
 TabConfig.title:SetText("Tab Selection")
 
 --Checkboxes
