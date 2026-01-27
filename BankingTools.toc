@@ -1,0 +1,8 @@
+## Interface: 90005
+## Title: Banking Tools
+## Notes: Tracks and exports item data to CSV
+## Author: ArtificerSkills
+## Version: 1.0.0
+## SavedVariables: BankingToolsData
+
+BankingTools.lua
